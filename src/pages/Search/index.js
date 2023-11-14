@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './search.css';
 import { getAddSp } from '~/API';
 
-const Search = () => {
+const Search = (props) => {
     const [productId, setProductId] = useState('');
     const [productQuantity, setProductQuantity] = useState('');
 
@@ -15,9 +15,16 @@ const Search = () => {
 
     const getAddsp = async (productId, productQuantity) => {
         try {
-            const response = await getAddSp(productId, productQuantity);
-            console.log(response);
-            const result = response.data;
+            const product = props.data1.find((item) => item.id === productId);
+
+            if (product) {
+                props.data.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: productQuantity,
+                });
+            }
         } catch (error) {
             console.error('Lỗi trong quá trình gửi yêu cầu API add', error);
         }

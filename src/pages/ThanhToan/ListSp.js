@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../Search";
 import './ThanhToan.css';
 
@@ -10,11 +10,15 @@ const ListSp = (props) => {
         sumPrice += (item.price * item.quantity)
     })
 
+    const formatNumberWithCommas = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
     return (
         <div id='list'>
             <div className="ListSp">
                 <div className='TextHeader'>Danh sách sản phẩm</div>
-                <Search />
+                <Search data1={props.dataSearch} data={props.data} />
                 <table>
                     <thead>
                         <th className='stt'>STT</th>
@@ -31,9 +35,9 @@ const ListSp = (props) => {
                                 <td>{index + 1}</td>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
-                                <td>{item.price} đ</td>
+                                <td>{formatNumberWithCommas(item.price)} đ</td>
                                 <td>{item.quantity}</td>
-                                <td>{item.quantity * item.price || 0} đ</td>
+                                <td>{formatNumberWithCommas(item.quantity * item.price) || 0} đ</td>
                                 <td onClick={() => props.handleDeleteClick(item)} className='delete' >Xoá</td>
                             </tr>
                         ))}
@@ -47,15 +51,18 @@ const ListSp = (props) => {
                 </div>
                 <div className="rowTT" >
                     <p className="total1" >Số điểm:</p>
-                    <p>{props.point} đ</p>
+                    <p>{props.point || 0} đ</p>
                 </div>
                 <div className="rowTT" >
                     <p className="total1" >Tổng thanh toán:</p>
-                    <p>{sumPrice - props.point} đ</p>
+                    <p>{sumPrice - props.point || 0} đ</p>
                 </div>
             </div>
 
-            <div className="sumit">Thanh toán</div>
+            <div
+                className="sumit"
+                onClick={props.summit}
+            >Thanh toán</div>
         </div>
     );
 }

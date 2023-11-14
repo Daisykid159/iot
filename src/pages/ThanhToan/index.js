@@ -56,16 +56,67 @@ const ThanhToan = (params) => {
         }
     };
 
+    const fakeData = [
+        {
+            id: 1,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+        {
+            id: 2,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+        {
+            id: 3,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+        {
+            id: 4,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+        {
+            id: 5,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+        {
+            id: 6,
+            name: "Bánh mì",
+            price: 10000,
+            quantity: 10,
+        },
+    ];
+
     const handleClickXoa = (item) => {
         setConfirmationDialogOpen(true);
         setItemToDelete(item);
     };
 
+    const summit = () => {
+        alert('Bạn đã thanh toán thành công!');
+        setUser({});
+        setListSp([]);
+    }
+
     return (
         <div>
             <Header />
             <User user={user} />
-            <ListSp data={listSp} point={user?.point} handleDeleteClick={handleClickXoa} />
+            <ListSp
+                dataSearch={fakeData}
+                data={listSp}
+                point={user?.point}
+                handleDeleteClick={handleClickXoa}
+                summit={summit}
+            />
             <Footer />
             {isConfirmationDialogOpen ? (<div id='xoa'>
                 <XoaSp
