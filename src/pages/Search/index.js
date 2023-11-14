@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './search.css';
+import { getAddSp } from '~/API';
 
 const Search = () => {
     const [productId, setProductId] = useState('');
@@ -7,10 +8,20 @@ const Search = () => {
 
     const handleClickAdd = () => {
         alert(`Thêm thành công\nID sản phẩm: ${productId}\nSố lượng sản phẩm: ${productQuantity}`);
-        // call api thêm sp
+        getAddsp(productId, productQuantity);
         setProductId('');
         setProductQuantity('');
     };
+
+    const getAddsp = async (productId, productQuantity) => {
+        try {
+            const response = await getAddSp(productId, productQuantity);
+            console.log(response);
+            const result = response.data;
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API add', error);
+        }
+    }
 
     return (
         <div id='search'>

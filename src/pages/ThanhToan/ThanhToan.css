@@ -73,6 +73,19 @@ td {
     left: 35%;
 }
 
+.btn {
+    background-color: black;
+    padding: 5px;
+    width: 35%;
+}
+
+.btns {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .delete {
     background-color: #ff0000;
     padding: 8px;
@@ -115,4 +128,5 @@ td {
     padding: 10px;
     background: #007bff;
     border-radius: 10px;
+    cursor: pointer;
 }

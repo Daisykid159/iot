@@ -30,7 +30,7 @@ const ListSp = (props) => {
                             <tr>
                                 <td>{index + 1}</td>
                                 <td>{item.id}</td>
-                                <td onClick={() => props.handleItemClick(item)}>{item.name}</td>
+                                <td>{item.name}</td>
                                 <td>{item.price} đ</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.quantity * item.price || 0} đ</td>
