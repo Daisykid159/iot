@@ -1,0 +1,37 @@
+#search {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+.input {
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    width: 40%;
+}
+
+.text {
+    font-size: 1em;
+    font-weight: 600;
+    width: 60%;
+}
+
+.textInput {
+    width: 40%;
+    border: none;
+    background-color: white;
+}
+
+.addSp {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: rgb(2, 131, 15);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}

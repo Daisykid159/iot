@@ -1,0 +1,118 @@
+.ListSp {
+    width: 100%;
+}
+
+.TextHeader {
+    width: 100%;
+    color: #007bff;
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 2% 0;
+}
+
+table {
+    width: 90%;
+    margin: 0 5%;
+    padding: 2% 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+td,
+th {
+    text-align: center;
+    border-left: 1px solid #ccc;
+}
+
+td {
+    border-top: 1px solid #ccc;
+    height: 25px;
+}
+
+.stt {
+    width: 4%;
+}
+
+.nameDV {
+    width: 37%;
+}
+
+.gia {
+    width: 20%;
+}
+
+.idsp {
+    width: 15%;
+}
+
+.sua {
+    width: 10%;
+}
+
+.xoa {
+    width: 8%;
+}
+
+.chiTiet {
+    width: 8%;
+}
+
+.textHeader {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+#xoa {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+}
+
+.delete {
+    background-color: #ff0000;
+    padding: 8px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user {
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.rowTT {
+    width: 100%;
+    display: flex;
+    margin-left: 5%;
+    font-size: 1.2rem;
+}
+
+.total {
+    width: 20%;
+    font-weight: 600;
+}
+
+.tinhtien {
+    margin: 2% 0 2% 55%;
+}
+
+.total1 {
+    width: 50%;
+    font-weight: 600;
+}
+
+.sumit {
+    margin: 0 0 0 64%;
+    width: 160px;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 10px;
+    background: #007bff;
+    border-radius: 10px;
+}
