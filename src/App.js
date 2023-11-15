@@ -5,7 +5,7 @@ import ThanhToan from './pages/ThanhToan';
 function App() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(true);
 
     const handleLogin = () => {
         if (username && password) {
