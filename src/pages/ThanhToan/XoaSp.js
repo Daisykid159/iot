@@ -13,7 +13,7 @@ const XoaSp = (props) => {
                 <p>Bạn có chắc chắn muốn xóa mục này?</p>
                 <div className='btns'>
                     <button onClick={() => props.onCancel()} className='btn'>Hủy</button>
-                    <button onClick={() => props.onConfirm()} className='btn'>Xác nhận</button>
+                    <button onClick={() => props.onConfirm()} className='btn btnRed'>Xác nhận</button>
                 </div>
             </div>
         </div>

@@ -74,9 +74,9 @@ td {
 }
 
 .btn {
-    background-color: black;
+    background-color: #007bff;
     padding: 5px;
-    width: 35%;
+    width: 30%;
 }
 
 .btns {
@@ -97,12 +97,15 @@ td {
 .user {
     width: 100%;
     margin-bottom: 3%;
+    position: relative;
 }
 
 .rowTT {
     width: 100%;
     display: flex;
+    align-items: center;
     margin-left: 5%;
+    margin-bottom: 10px;
     font-size: 1.2rem;
 }
 
@@ -126,7 +129,60 @@ td {
     text-align: center;
     font-size: 1.6rem;
     padding: 10px;
+    color: white;
     background: #007bff;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.iconadd {
+    position: absolute;
+    top: 0;
+    right: 15%;
+}
+
+.gdAddKH {
+    position: absolute;
+    width: 60%;
+    top: 1.6rem;
+    left: 17%;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 20px 20px #ccc;
+    padding: 2%;
+}
+
+.iconClose {
+    position: absolute;
+    top: 0.9rem;
+    right: 2%;
+    cursor: pointer;
+}
+
+.totalAdd {
+    width: 30%;
+    font-weight: 600;
+}
+
+.inputAdd {
+    width: 55%;
+}
+
+.TextHeaderSmall {
+    font-size: 1.4rem;
+    margin: 10px 0 20px;
+}
+
+.btnAdd {
+    width: 94%;
+    justify-content: flex-end;
+}
+
+.btnGreen {
+    background-color: rgb(19, 203, 19);
+}
+
+.btnRed {
+    background-color: #ff0000;
 }
