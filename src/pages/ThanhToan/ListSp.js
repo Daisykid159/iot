@@ -69,19 +69,37 @@ const ListSp = (props) => {
     useEffect(() => {
         if (update) {
             const tmpProductQuantity = parseInt(productQuantity, 10);
-            const itemFound = props.data.find(item => item.id_product === parseInt(productId, 10));
-            if (itemFound && itemFound.quantity >= tmpProductQuantity) {
-                // Item đã có trong listsp và số lượng đủ
-                const itemSelected = {
-                    ...itemFound,
-                    quantity: tmpProductQuantity
-                };
+            const itemFoundData = props.data.find(item => item.id_product === parseInt(productId, 10));
+            const itemFoundListSp = listsp.find(item => item.id_product === parseInt(productId, 10));
+            if (itemFoundData && itemFoundData.quantity >= tmpProductQuantity) {
+                if (itemFoundListSp){
+                    if (itemFoundListSp.quantity + tmpProductQuantity <= itemFoundData.quantity) {
+                        tmpSumPrice += itemFoundData.price * tmpProductQuantity;
+                        const itemSelected = {
+                            ...itemFoundData,
+                            quantity: tmpProductQuantity + itemFoundListSp.quantity
+                        };
+                        listsp?.map((item, index) => {
+                            if (item.id_product === itemFoundListSp.id_product) {
+                                listsp.splice(index, 1, itemSelected);
+                            }
+                        })
+                    } else {
+                        alert(`Sản phẩm đã có trong hóa đơn và số lượng sản phẩm cộng thêm không đủ!`);
+                    }
+                } else {
+                    // Item đã có trong listsp và số lượng đủ
+                    const itemSelected = {
+                        ...itemFoundData,
+                        quantity: tmpProductQuantity
+                    };
 
-                tmpSumPrice += itemFound.price * tmpProductQuantity;
+                    tmpSumPrice += itemFoundData.price * tmpProductQuantity;
 
-                listsp.push(itemSelected);
+                    listsp.push(itemSelected);
+                }
             } else {
-                alert(`Id sản phẩm không đúng hoặc số lượng sản phẩm không đủ`);
+                alert(`Id sản phẩm không đúng hoặc số lượng sản phẩm không đủ!`);
             }
             console.log(props.data);
             setSumPrice(tmpSumPrice + sumPrice);
