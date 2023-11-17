@@ -1,12 +1,12 @@
 // apiService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api'; // Thay đổi URL API cụ thể của bạn
+const API_URL = 'http://localhost:8080/api'; // Thay đổi URL API cụ thể của bạn
 
 // Api lấy danh sách sản phẩm
 export const getListSp = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/listsp`);
+        const response = await axios.get(`${API_URL}/product/getAll`);
         return response;
     } catch (error) {
         throw error;
@@ -47,8 +47,27 @@ export const deleteItem = async (id) => {
 };
 
 // Api thêm khách hàng mới
-export const addUser = async (name, sdt) => {
+export const addUser = async (name, sdt, uid) => {
+    try {
+        const response = await axios.post(`${API_URL}/user/create`, {
+            name: name,
+            phone: sdt,
+            uid: uid,
+        });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
 
+// Api lấy id thẻ Rfid
+export const getlistRfid = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/rfid/getIsntAction`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
 };
 
 // Api thanh toán

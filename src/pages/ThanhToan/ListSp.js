@@ -4,21 +4,40 @@ import './ThanhToan.css';
 
 const ListSp = (props) => {
 
+    const [isChecked, setIsChecked] = useState(true);
+    const [point, setPoint] = useState(props.point);
+    const [selectItem, setSelectItem] = useState({});
+    const [data, setData] = useState([]);
+    const listsp = [];
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+        if (isChecked) {
+            setPoint(0);
+        } else {
+            setPoint(props.point);
+        }
+    };
+
     let sumPrice = 0;
 
-    props.data?.map(item => {
-        sumPrice += (item.price * item.quantity)
-    })
-
     const formatNumberWithCommas = (number) => {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
     };
+
+    useEffect(() => {
+        listsp.push(selectItem);
+        listsp?.map(item => {
+            sumPrice += (item.price * item.quantity)
+        })
+        setData(listsp);
+    }, [selectItem])
 
     return (
         <div id='list'>
             <div className="ListSp">
                 <div className='TextHeader'>Danh sách sản phẩm</div>
-                <Search data1={props.dataSearch} data={props.data} />
+                <Search setData={setSelectItem} data={props.data} />
                 <table>
                     <thead>
                         <th className='stt'>STT</th>
@@ -30,11 +49,11 @@ const ListSp = (props) => {
                         <th className='xoa'></th>
                     </thead>
                     <tbody>
-                        {props.data?.map((item, index) => (
+                        {data?.map((item, index) => (
                             <tr>
                                 <td>{index + 1}</td>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
+                                <td>{item.id_product}</td>
+                                <td>{item.name_product}</td>
                                 <td>{formatNumberWithCommas(item.price)} đ</td>
                                 <td>{item.quantity}</td>
                                 <td>{formatNumberWithCommas(item.quantity * item.price) || 0} đ</td>
@@ -45,15 +64,27 @@ const ListSp = (props) => {
                 </table>
             </div>
             <div className="tinhtien" >
-                <div className="rowTT" >
-                    <p className="total1" >Tổng tiền sản phẩm: </p>
+                <div className="rowTT rowBuild" >
+                    <p className="total1" >Dùng điểm:</p>
+                    <input
+                        className="checkBox"
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                    />
+                </div>
+
+                <div className="rowTT rowBuild" >
+                    <p className="total1" >Tổng tiền sản phẩm:</p>
                     <p>{sumPrice} đ</p>
                 </div>
-                <div className="rowTT" >
+
+                <div className="rowTT rowBuild" >
                     <p className="total1" >Số điểm:</p>
-                    <p>{props.point || 0} đ</p>
+                    <p>{point || 0} đ</p>
                 </div>
-                <div className="rowTT" >
+
+                <div className="rowTT rowBuild" >
                     <p className="total1" >Tổng thanh toán:</p>
                     <p>{sumPrice - props.point || 0} đ</p>
                 </div>

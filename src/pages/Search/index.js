@@ -7,10 +7,15 @@ const Search = (props) => {
     const [productQuantity, setProductQuantity] = useState('');
 
     const handleClickAdd = () => {
+        const tmpListSp = [];
+        props.data.map(item => {
+            if (item.id_product === parseInt(productId, 10) && item.quantity >= parseInt(productQuantity, 10)) {
+                console.log(true);
+                tmpListSp.push(item);
+            }
+        })
+        props.setData(tmpListSp);
         alert(`Thêm thành công\nID sản phẩm: ${productId}\nSố lượng sản phẩm: ${productQuantity}`);
-        getAddsp(productId, productQuantity);
-        setProductId('');
-        setProductQuantity('');
     };
 
     const getAddsp = async (productId, productQuantity) => {
