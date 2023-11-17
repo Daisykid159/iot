@@ -68,9 +68,9 @@ td {
     padding: 20px;
     border-radius: 10px;
     border: 1px solid black;
-    position: absolute;
+    position: fixed;
     top: 40%;
-    left: 35%;
+    left: 38%;
 }
 
 .btn {
@@ -148,9 +148,9 @@ td {
 }
 
 .gdAddKH {
-    position: absolute;
+    position: fixed;
     width: 60%;
-    top: 1.6rem;
+    top: 10%;
     left: 17%;
     border-radius: 20px;
     background-color: white;

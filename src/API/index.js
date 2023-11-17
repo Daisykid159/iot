@@ -30,17 +30,7 @@ export const getAddSp = async (id, sl) => {
             id: parseInt(id, 10),
             sl: parseInt(sl, 10),
         });
-        console.log(response);
         return response;
-    } catch (error) {
-        throw error;
-    }
-};
-
-// Api xóa sản phẩm khỏi danh sách
-export const deleteItem = async (id) => {
-    try {
-        await axios.delete(`${API_URL}/deletesp/${id}`);
     } catch (error) {
         throw error;
     }
