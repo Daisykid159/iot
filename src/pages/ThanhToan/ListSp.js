@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Search from "../Search";
 import './ThanhToan.css';
 import XoaSp from '~/pages/ThanhToan/XoaSp';
+import XacNhanThanhToan from '~/pages/ThanhToan/XacNhanThanhToan';
+import { getUser } from '~/API';
 
 const listsp = [];
 
@@ -16,6 +18,7 @@ const ListSp = (props) => {
     const [update, setUpDate] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+    const [isXacNhanThanhToan, setIsXacNhanThanhToan] = useState(false);
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -26,8 +29,9 @@ const ListSp = (props) => {
         }
     };
 
-    const handleCancelDelete = () => {
+    const handleCancel = () => {
         setConfirmationDialogOpen(false);
+        setIsXacNhanThanhToan(false);
     };
 
     const handleConfirmDelete = async () => {
@@ -52,12 +56,23 @@ const ListSp = (props) => {
         setItemToDelete(item);
     };
 
+    const handleSumit = async () => {
+        try {
+            const response = await getUser();
+            const result = response.data;
+            alert('Bạn đã thanh toán thành công!');
+            setSumPrice(0);
+            listsp.splice(0, listsp.length);
+            props.setUser({});
+            setIsXacNhanThanhToan(false)
+            //     Call Api thanh toán
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API thanh toan', error);
+        }
+    }
+
     const summit = () => {
-        alert('Bạn đã thanh toán thành công!');
-        setSumPrice(0);
-        listsp.splice(0, listsp.length);
-        props.setUser({});
-    //     Call Api thanh toán
+        setIsXacNhanThanhToan(true);
     }
 
     let tmpSumPrice = 0;
@@ -72,7 +87,7 @@ const ListSp = (props) => {
             const itemFoundData = props.data.find(item => item.id_product === parseInt(productId, 10));
             const itemFoundListSp = listsp.find(item => item.id_product === parseInt(productId, 10));
             if (itemFoundData && itemFoundData.quantity >= tmpProductQuantity) {
-                if (itemFoundListSp){
+                if (itemFoundListSp) {
                     if (itemFoundListSp.quantity + tmpProductQuantity <= itemFoundData.quantity) {
                         tmpSumPrice += itemFoundData.price * tmpProductQuantity;
                         const itemSelected = {
@@ -178,8 +193,16 @@ const ListSp = (props) => {
             {isConfirmationDialogOpen ? (<div id='xoa'>
                 <XoaSp
                     isOpen={isConfirmationDialogOpen}
-                    onCancel={handleCancelDelete}
+                    onCancel={handleCancel}
                     onConfirm={handleConfirmDelete}
+                />
+            </div>) : null}
+
+            {isXacNhanThanhToan ? (<div id='xoa'>
+                <XacNhanThanhToan
+                    isOpen={isXacNhanThanhToan}
+                    onCancel={handleCancel}
+                    onConfirm={handleSumit}
                 />
             </div>) : null}
         </div>

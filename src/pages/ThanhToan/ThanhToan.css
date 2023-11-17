@@ -198,6 +198,16 @@ td {
     justify-content: flex-end;
 }
 
+.btnUpdateDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btnUpdate {
+    width: 35%;
+}
+
 .btnGreen {
     background-color: rgb(19, 203, 19);
 }

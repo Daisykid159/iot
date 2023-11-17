@@ -1,7 +1,7 @@
 import React from 'react';
 import './ThanhToan.css';
 
-const XoaSp = (props) => {
+const XacNhanThanhToan = (props) => {
 
     if (!props.isOpen) {
         return null;
@@ -20,4 +20,4 @@ const XoaSp = (props) => {
     );
 };
 
-export default XoaSp;
+export default XacNhanThanhToan;

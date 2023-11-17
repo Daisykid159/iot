@@ -21,9 +21,11 @@ const ThanhToan = (params) => {
     const getuser = async () => {
         try {
             const response = await getUser();
-            const result = response.data;
+            const result = response.data[0];
+            console.log(result);
             setUser(result);
         } catch (error) {
+            setUser(null);
             console.error('Lỗi trong quá trình gửi yêu cầu API user', error);
         }
     }
@@ -41,7 +43,7 @@ const ThanhToan = (params) => {
     return (
         <div>
             <Header />
-            <User user={user} />
+            <User user={user} getuser={getuser} />
             <ListSp
                 data={listSp}
                 point={user?.point}
