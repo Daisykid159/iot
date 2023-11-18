@@ -22,7 +22,6 @@ const ThanhToan = (params) => {
         try {
             const response = await getUser();
             const result = response.data[0];
-            console.log(result);
             setUser(result);
         } catch (error) {
             setUser(null);
@@ -45,6 +44,7 @@ const ThanhToan = (params) => {
             <Header />
             <User user={user} getuser={getuser} />
             <ListSp
+                user={user}
                 data={listSp}
                 point={user?.point}
                 setUser={setUser}

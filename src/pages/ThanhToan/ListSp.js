@@ -3,14 +3,16 @@ import Search from "../Search";
 import './ThanhToan.css';
 import XoaSp from '~/pages/ThanhToan/XoaSp';
 import XacNhanThanhToan from '~/pages/ThanhToan/XacNhanThanhToan';
-import { getUser } from '~/API';
+import { summitThanhToan } from '~/API';
+import user from '~/pages/ThanhToan/User';
+import moment from 'moment';
 
 const listsp = [];
 
 const ListSp = (props) => {
 
-    const [isChecked, setIsChecked] = useState(true);
-    const [point, setPoint] = useState(props.point);
+    const [isChecked, setIsChecked] = useState(false);
+    const [point, setPoint] = useState(props.user?.point || 0);
     const [productId, setProductId] = useState('');
     const [productQuantity, setProductQuantity] = useState('');
     const [sumPrice, setSumPrice] = useState(0)
@@ -21,13 +23,31 @@ const ListSp = (props) => {
     const [isXacNhanThanhToan, setIsXacNhanThanhToan] = useState(false);
 
     const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
-        if (isChecked) {
-            setPoint(0);
-        } else {
-            setPoint(props.point);
-        }
+        if(props.user?.point && listsp.length) setIsChecked(!isChecked);
     };
+
+    const getCurrentDay = () => {
+        const today = new Date();
+        const formattedDay = moment(today).format('YYYY-MM-DD');
+        return formattedDay;
+    };
+
+    useEffect(() => {
+        if(listsp.length){
+            if (isChecked) {
+                setPoint(props.user?.point || 0);
+                setSumPrice(sumPrice - (props.user?.point || 0));
+
+            } else {
+                setPoint(0);
+                setSumPrice(sumPrice + (props.user?.point || 0));
+            }
+        }
+    }, [isChecked])
+
+    useEffect(() => {
+        setPoint(props.user?.point || 0);
+    }, [user])
 
     const handleCancel = () => {
         setConfirmationDialogOpen(false);
@@ -58,14 +78,16 @@ const ListSp = (props) => {
 
     const handleSumit = async () => {
         try {
-            const response = await getUser();
-            const result = response.data;
+            const dayTT = getCurrentDay()
+            console.log(dayTT, typeof dayTT);
+            const response = await summitThanhToan(dayTT, props.user.id, sumPrice, isChecked, listsp);
             alert('Bạn đã thanh toán thành công!');
             setSumPrice(0);
+            setPoint(0);
+            setIsChecked(false)
             listsp.splice(0, listsp.length);
-            props.setUser({});
+            props.setUser(null);
             setIsXacNhanThanhToan(false)
-            //     Call Api thanh toán
         } catch (error) {
             console.error('Lỗi trong quá trình gửi yêu cầu API thanh toan', error);
         }
@@ -116,7 +138,6 @@ const ListSp = (props) => {
             } else {
                 alert(`Id sản phẩm không đúng hoặc số lượng sản phẩm không đủ!`);
             }
-            console.log(props.data);
             setSumPrice(tmpSumPrice + sumPrice);
             setLoad(!load);
         }
@@ -171,17 +192,17 @@ const ListSp = (props) => {
 
                 <div className="rowTT rowBuild" >
                     <p className="total1" >Tổng tiền sản phẩm:</p>
-                    <p>{sumPrice} đ</p>
+                    <p>{sumPrice + point} đ</p>
                 </div>
 
                 <div className="rowTT rowBuild" >
                     <p className="total1" >Số điểm:</p>
-                    <p>{point || 0} đ</p>
+                    <p>- {point || 0} đ</p>
                 </div>
 
                 <div className="rowTT rowBuild" >
                     <p className="total1" >Tổng thanh toán:</p>
-                    <p>{sumPrice - (props.point || 0)} đ</p>
+                    <p>{sumPrice} đ</p>
                 </div>
             </div>
 

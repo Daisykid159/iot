@@ -66,11 +66,14 @@ td {
 #xoa {
     background-color: white;
     padding: 20px;
+    box-shadow: 0 0 20px 20px #cccccc;
     border-radius: 10px;
     border: 1px solid black;
     position: fixed;
+    text-align: center;
+    width: 30%;
     top: 40%;
-    left: 38%;
+    left: 33%;
 }
 
 .btn {
@@ -116,7 +119,7 @@ td {
 }
 
 .total {
-    width: 22%;
+    width: 25%;
     font-weight: 600;
 }
 

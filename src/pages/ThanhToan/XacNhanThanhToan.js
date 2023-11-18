@@ -9,12 +9,10 @@ const XacNhanThanhToan = (props) => {
 
     return (
         <div className="XoaDV">
-            <div className="textXoa">
-                <p>Bạn có chắc chắn muốn xóa mục này?</p>
-                <div className='btns'>
-                    <button onClick={() => props.onCancel()} className='btn'>Hủy</button>
-                    <button onClick={() => props.onConfirm()} className='btn btnRed'>Xác nhận</button>
-                </div>
+            <p className="textXoa" >Vui lòng bấm xác nhận thanh toán</p>
+            <div className='btns'>
+                <button onClick={() => props.onCancel()} className='btn'>Hủy</button>
+                <button onClick={() => props.onConfirm()} className='btn btnRed'>Xác nhận</button>
             </div>
         </div>
     );

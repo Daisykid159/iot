@@ -32,7 +32,6 @@ export const addUser = async (name, sdt, uid) => {
             uid: uid,
             point: 0,
         });
-        console.log(response);
         return response;
     } catch (error) {
         throw error;
@@ -50,17 +49,31 @@ export const getlistRfid = async () => {
 };
 
 // Api thanh toán
-export const summit = async (id_user, totalPrice, usePoint, productCustomList) => {
+export const summitThanhToan = async (dayTT, id_user, totalPrice, usePoint, productCustomList) => {
     try {
-        const response = await axios.post(`${API_URL}/user/create`, {
-            // dinh dang yyyy-MM-dd
-            // private String createdDate;
-            // private Long id_user;
-            // private Double totalPrice; tổng tiền
-            // private boolean usePoint; dùng điểm hay không
-            // private  List<ProductCustom> productCustomList = new ArrayList<>(); mảng gồm id sản phẩm và số lượng sản phẩm
+
+        const listspCanTT = productCustomList.map((item) => {
+            return {
+                id: item.id_product,
+                quantity: item.quantity,
+            };
         });
+
+        const response = await axios.post(`${API_URL}/bill/create/${id_user}`, {
+            "createdDate": dayTT,
+            "id_user": id_user,
+            "totalPrice": totalPrice,
+            "usePoint": usePoint,
+            "productCustomList": listspCanTT
+        });
+        console.log(response);
         return response;
+        // dinh dang yyyy-MM-dd
+        // private String createdDate;
+        // private Long id_user;
+        // private Double totalPrice; tổng tiền
+        // private boolean usePoint; dùng điểm hay không
+        // private  List<ProductCustom> productCustomList = new ArrayList<>(); mảng gồm id sản phẩm và số lượng sản phẩm
     } catch (error) {
         throw error;
     }

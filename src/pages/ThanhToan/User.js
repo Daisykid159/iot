@@ -7,7 +7,6 @@ const User = (props) => {
 
     const [isShowAdd, setIsShowAdd] = useState(false);
 
-    console.log(props.user);
     return (
         <div className="user">
             {!isShowAdd ? (
@@ -17,6 +16,10 @@ const User = (props) => {
                         <div>
                             <div className="rowTT" >
                                 <p className="total" >ID khách hàng:</p>
+                                <p>{props.user.id}</p>
+                            </div>
+                            <div className="rowTT" >
+                                <p className="total" >Số thẻ khách hàng:</p>
                                 <p>{props.user.uid}</p>
                             </div>
                             <div className="rowTT" >
