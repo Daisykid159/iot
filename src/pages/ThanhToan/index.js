@@ -21,7 +21,7 @@ const ThanhToan = (params) => {
     const getuser = async () => {
         try {
             const response = await getUser();
-            const result = response.data[0];
+            const result = response.data;
             setUser(result);
         } catch (error) {
             setUser(null);

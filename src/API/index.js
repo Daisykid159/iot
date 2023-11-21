@@ -16,7 +16,7 @@ export const getListSp = async (id) => {
 // Api lấy thông tin user
 export const getUser = async () => {
     try {
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/user/current`);
         return response;
     } catch (error) {
         throw error;
