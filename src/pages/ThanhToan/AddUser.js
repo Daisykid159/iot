@@ -24,8 +24,17 @@ function AddUser(props) {
 
     const AddUser = async () => {
         try {
-            const response = await addUser(userName, userSDT, rfId);
-            const result = response.data;
+            if(userName && userSDT && rfId) {
+                const response = await addUser(userName, userSDT, rfId);
+                const result = response.data;
+                alert(`Thêm thành công\nTên khách hàng: ${userName}\nSĐT Khách hàng: ${userSDT}\n ID thẻ: ${rfId}`);
+                setUserName('');
+                setUserSDT('');
+                setRfId('')
+                props.setIsShowAdd(false)
+            } else {
+                alert("Vui lòng nhập đủ thông tin!")
+            }
         } catch (error) {
             console.error('Lỗi trong quá trình gửi yêu cầu API user', error);
         }
@@ -38,11 +47,6 @@ function AddUser(props) {
 
     const handleClickAddUser = () => {
         AddUser();
-        alert(`Thêm thành công\nTên khách hàng: ${userName}\nSĐT Khách hàng: ${userSDT}\n ID thẻ: ${rfId}`);
-        setUserName('');
-        setUserSDT('');
-        setRfId('')
-        props.setIsShowAdd(false)
     };
 
     useEffect(() => {

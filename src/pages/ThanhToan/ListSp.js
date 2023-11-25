@@ -3,7 +3,7 @@ import Search from "../Search";
 import './ThanhToan.css';
 import XoaSp from '~/pages/ThanhToan/XoaSp';
 import XacNhanThanhToan from '~/pages/ThanhToan/XacNhanThanhToan';
-import { summitThanhToan } from '~/API';
+import { summitThanhToan, summitThanhToanNotUser } from '~/API';
 import user from '~/pages/ThanhToan/User';
 import moment from 'moment';
 
@@ -80,7 +80,14 @@ const ListSp = (props) => {
         try {
             const dayTT = getCurrentDay()
             console.log(dayTT, typeof dayTT);
-            const response = await summitThanhToan(dayTT, props.user.id, sumPrice, isChecked, listsp);
+
+            if(props.user?.id) {
+                console.log(props.user);
+                const response = await summitThanhToan(dayTT, props.user.id, sumPrice, isChecked, listsp);
+            } else {
+                console.log(props.user);
+                const response = await summitThanhToanNotUser(dayTT, sumPrice, listsp);
+            }
             alert('Bạn đã thanh toán thành công!');
             setSumPrice(0);
             setPoint(0);
