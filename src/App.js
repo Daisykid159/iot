@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import ThanhToan from './pages/ThanhToan';
+import Home from './pages/Home';
+import Header from './pages/Header';
 
 function App() {
     const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ function App() {
         <div id='App'>
             {
                 isLoggedIn ? (
-                    <ThanhToan />
+                    <Header />
                 ) : (<div className='App'>
                     <h2 className='textCenter'>Đăng nhập</h2>
                     <form className="login-form">
