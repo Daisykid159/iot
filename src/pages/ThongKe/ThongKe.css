@@ -1,0 +1,61 @@
+.green {
+    background-color: green;
+}
+
+.red {
+    background: red;
+}
+
+.yellow {
+    background-color: rgb(255, 153, 0);
+}
+
+.white {
+    color: white;
+}
+
+#ThongKe {
+    width: 90%;
+    margin: 10px 5%;
+}
+
+.borderRight {
+    border-right: 1px solid #ccc;
+}
+
+.textThongKe {
+    width: 100%;
+    color: #007bff;
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.listThongKe {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itemThongKe {
+    line-height: 1.2rem;
+    width: 20%;
+    height: 70px;
+    text-align: center;
+    padding: 10px;
+}
+
+.listSelect {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.itemSelect {
+    width: 50%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

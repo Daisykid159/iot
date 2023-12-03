@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../Footer';
-import Header from '../Header';
 import ListSp from './ListSp';
 import User from './User';
 import { getListSp, getUser } from '~/API';
@@ -41,7 +39,6 @@ const ThanhToan = (params) => {
 
     return (
         <div>
-            <Header />
             <User user={user} getuser={getuser} />
             <ListSp
                 user={user}
@@ -49,7 +46,6 @@ const ThanhToan = (params) => {
                 point={user?.point}
                 setUser={setUser}
             />
-            <Footer />
         </div>
     )
 }

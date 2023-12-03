@@ -1,11 +1,20 @@
 import React from 'react';
 import './Home.css';
-import Header from '../Header';
 
 function Home() {
     return (
         <div id='home'>
-            <Header />
+            <div className='textHeader'>Các thành viên nhóm 5</div>
+            <ul>
+                <li className='ThanhVienTrongNhom Lister'>- Vũ Văn Dũng - B20DCCn144 ( Trưởng nhóm )</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+                <li className='ThanhVienTrongNhom'>- Vũ Văn Dũng - B20DCCn144</li>
+            </ul>
         </div>
     )
 }

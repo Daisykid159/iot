@@ -11,8 +11,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    font-size: 22px;
     color: blue;
     font-weight: 700;
     border-bottom: 1px solid rgb(188, 188, 188);
+}
+
+.listItem {
+    padding-top: 5px;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.item {
+    margin-top: 11px;
+    color: aqua;
+    text-align: center;
+}
+
+.link {
+    width: 100%;
+    padding: 30px;
 }

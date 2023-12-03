@@ -1,0 +1,41 @@
+.textThongKeKH {
+    width: 100%;
+    color: #007bff;
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.search {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    margin: 10px 15%;
+}
+
+.textSearch {
+    width: 30%;
+}
+
+.inputSearch {
+    display: flex;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.inputS {
+    border: none;
+    border-radius: 0;
+}
+
+.inputIcon {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+}
