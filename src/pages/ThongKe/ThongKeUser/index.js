@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './thongkeuser.css';
 import IconSearch from '~/Icon/IconSearch';
-import { click } from '@testing-library/user-event/dist/click';
+import ThongKeUser from '~/pages/ThongKe/ThongKeUser/ThongKeUser';
 
 function ThongKeUserList(props) {
     const listUser = [
@@ -31,48 +31,69 @@ function ThongKeUserList(props) {
         }
     ]
 
+    const [itemSelect, setItemSelect] = useState(null)
+    const [showTKUser, setShowTKUser] = useState(false)
+
+    useEffect(() => {
+        setShowTKUser(props.showListUser)
+    }, [])
+
+    const clickItem = (item) => {
+        setItemSelect(item)
+        setShowTKUser(true)
+    }
+
+    const clickBack = (item) => {
+        setItemSelect(null)
+        setShowTKUser(false)
+    }
+
+
     return (
         <div id='ThongKe'>
-            <div className='textThongKeKH' >Thống kê khách hàng</div>
-            <div className='searchTen search'>
-                <p className='textSearch' >Tìm kiếm theo tên</p>
-                <div className='inputSearch'>
-                    <input type='text' className='inputS' />
-                    <div className='inputIcon'>
-                        <IconSearch />
+            {!showTKUser ?
+                (<div>
+                    <div className='textThongKeKH'>Thống kê khách hàng</div>
+                    <div className='searchTen search'>
+                        <p className='textSearch' >Tìm kiếm theo tên</p>
+                        <div className='inputSearch'>
+                            <input type='text' className='inputS' />
+                            <div className='inputIcon'>
+                                <IconSearch />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div className='searchSDT search'>
-                <p className='textSearch' >Tìm kiếm theo SĐT</p>
-                <div className='inputSearch'>
-                    <input type='text' className='inputS' />
-                    <div className='inputIcon'>
-                        <IconSearch />
+                    <div className='searchSDT search'>
+                        <p className='textSearch' >Tìm kiếm theo SĐT</p>
+                        <div className='inputSearch'>
+                            <input type='text' className='inputS' />
+                            <div className='inputIcon'>
+                                <IconSearch />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <table>
-                    <thead>
-                        <th className='stt'>STT</th>
-                        <th className='nameKH'>Tên khách hàng</th>
-                        <th className='sdtKH'>SĐT</th>
-                        <th className='countKH'>Số điểm hiện tại</th>
-                    </thead>
-                    <tbody>
-                        {listUser?.map((item, index) => (
-                            <tr onClick={() => alert(`Click ${index}`)}>
-                                <td>{index + 1}</td>
-                                <td>{item.name}</td>
-                                <td>{item.SĐT}</td>
-                                <td>{item.count}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <th className='stt'>STT</th>
+                                <th className='nameKH'>Tên khách hàng</th>
+                                <th className='sdtKH'>SĐT</th>
+                                <th className='countKH'>Số điểm hiện tại</th>
+                            </thead>
+                            <tbody>
+                                {listUser?.map((item, index) => (
+                                    <tr onClick={() => clickItem(item)}>
+                                        <td>{index + 1}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.SĐT}</td>
+                                        <td>{item.count} điểm</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>) : (<ThongKeUser clickBackList={clickBack} item={itemSelect} />)}
         </div>
     )
 }

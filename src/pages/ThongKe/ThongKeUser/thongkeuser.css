@@ -1,3 +1,7 @@
+#ThongKe {
+    padding-bottom: 20px;
+}
+
 .textThongKeKH {
     width: 100%;
     color: #007bff;
@@ -16,6 +20,7 @@
 
 .textSearch {
     width: 30%;
+    font-size: 1.1rem;
 }
 
 .inputSearch {
@@ -38,4 +43,16 @@
     justify-content: center;
     background-color: white;
     cursor: pointer;
+    border-left: 1px solid #ccc;
+}
+
+.iconBack {
+    position: absolute;
+}
+
+/* Bkav Dungvvd: CSS for ThongKeUser*/
+#ThongKeUser {}
+
+.tenKH {
+    font-size: 1.8rem;
 }

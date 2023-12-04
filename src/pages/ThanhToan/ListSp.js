@@ -23,7 +23,7 @@ const ListSp = (props) => {
     const [isXacNhanThanhToan, setIsXacNhanThanhToan] = useState(false);
 
     const handleCheckboxChange = () => {
-        if(props.user?.point && listsp.length) setIsChecked(!isChecked);
+        if (props.user?.point && listsp.length) setIsChecked(!isChecked);
     };
 
     const getCurrentDay = () => {
@@ -33,7 +33,7 @@ const ListSp = (props) => {
     };
 
     useEffect(() => {
-        if(listsp.length){
+        if (listsp.length) {
             if (isChecked) {
                 setPoint(props.user?.point || 0);
                 setSumPrice(sumPrice - (props.user?.point || 0));
@@ -77,11 +77,15 @@ const ListSp = (props) => {
     };
 
     const handleSumit = async () => {
+        if (!listsp.length) {
+            alert("Vui lòng nhập mã sản phẩm và số lượng để thanh toán!")
+            setIsXacNhanThanhToan(false)
+        }
         try {
             const dayTT = getCurrentDay()
             console.log(dayTT, typeof dayTT);
 
-            if(props.user?.id) {
+            if (props.user?.id) {
                 console.log(props.user);
                 const response = await summitThanhToan(dayTT, props.user.id, sumPrice, isChecked, listsp);
             } else {
@@ -165,7 +169,7 @@ const ListSp = (props) => {
                     <thead>
                         <th className='stt'>STT</th>
                         <th className='idsp'>ID sản phẩm</th>
-                        <th className='nameDV'>Tên dịch vụ</th>
+                        <th className='nameDV'>Tên sản phẩm</th>
                         <th className='gia'>Đơn giá</th>
                         <th className='sua'>Số lượng</th>
                         <th className='gia'>Thành tiền</th>

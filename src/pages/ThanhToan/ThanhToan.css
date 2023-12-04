@@ -1,3 +1,7 @@
+#list {
+    padding-bottom: 20px;
+}
+
 .ListSp {
     width: 100%;
 }
@@ -23,6 +27,7 @@ td,
 th {
     text-align: center;
     border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
 td {

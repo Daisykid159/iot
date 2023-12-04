@@ -3,7 +3,9 @@ import './footer.css';
 
 function Footer() {
     return (
-        <div className='footer'>Code by Vũ Văn Dũng - B20DCCN144</div>
+        <div id='footer'>
+            <div className='footer'>Code by Vũ Văn Dũng - B20DCCN144</div>
+        </div>
     )
 }
 
