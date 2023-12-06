@@ -23,9 +23,9 @@
 .search {
     justify-content: space-between;
     display: flex;
-    width: 70%;
+    width: 100%;
     align-items: center;
-    margin: 10px 15%;
+    margin: 10px 0%;
 }
 
 .textSearch {

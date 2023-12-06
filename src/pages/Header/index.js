@@ -29,7 +29,6 @@ function Header(props) {
                 <Route path="pages/ThongKe" element={<ThongKe />} />
                 <Route path="pages/ThanhToan" element={<ThanhToan />} />
             </Routes>
-            <Footer />
         </Router>
     );
 }
