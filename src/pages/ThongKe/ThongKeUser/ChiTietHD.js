@@ -1,6 +1,7 @@
 import React from "react";
 import IconBack from "~/Icon/IconBack";
 import './thongkeuser.css';
+import { formatNumberWithCommas } from '~/App';
 
 function ChiTietHD(props) {
 
@@ -28,11 +29,9 @@ function ChiTietHD(props) {
         sumPrice: 10,
         point: 1000,
         isChecked: true,
+        nameKhachHang: "Vũ Văn Dũng",
+        ngayMuahang: '22/10/2002',
     }
-
-    const formatNumberWithCommas = (number) => {
-        return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
-    };
 
     return (
         <div>
@@ -40,6 +39,17 @@ function ChiTietHD(props) {
                 <IconBack />
             </div>
             <div className='textThongKeKH' >Chi tiết hoá đơn</div>
+
+            <div className="rowText" >
+                <p>Tên khách hàng:</p>
+                <p>{ChiTietHDUser.nameKhachHang}</p>
+            </div>
+
+            <div className="rowText" >
+                <p>Ngày mua hàng:</p>
+                <p>{props.bill.ngayMuaHang}</p>
+            </div>
+
             <div>
                 <table>
                     <thead>

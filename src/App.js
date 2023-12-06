@@ -11,4 +11,8 @@ function App() {
     )
 }
 
+export const formatNumberWithCommas = (number) => {
+    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
+};
+
 export default App;

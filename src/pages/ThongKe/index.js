@@ -8,23 +8,7 @@ function ThongKe(params) {
 
     return (
         <div id='ThongKe'>
-            <div className='textThongKe'>Thống kê</div>
-            <div className='listThongKe'>
-                <div className='itemThongKe green white'>
-                    <p>Tổng doanh số trong ngày</p>
-                    <p>0 vnđ</p>
-                </div>
 
-                <div className='itemThongKe red white'>
-                    <p>Số điểm đã được dùng trong ngày</p>
-                    <p>0 điểm</p>
-                </div>
-
-                <div className='itemThongKe yellow white'>
-                    <p>Số điểm đã cộng cho khách hàng ngày</p>
-                    <p>0 điểm</p>
-                </div>
-            </div>
             <div className='listSelect'>
                 <div className='itemSelect borderRight'
                     style={{ backgroundColor: showSP ? '#007bff' : '#007bff87' }}
@@ -43,8 +27,8 @@ function ThongKe(params) {
                 </div>
             </div>
             {showSP ?
-                (<ThongKeListMh />) :
-                (<ThongKeUserList />)
+                (<ThongKeListMh isShow={showSP} />) :
+                (<ThongKeUserList isShow={true} />)
             }
         </div>
     )

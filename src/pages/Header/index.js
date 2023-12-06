@@ -6,7 +6,7 @@ import ThanhToan from '../ThanhToan';
 import Footer from '~/pages/Footer';
 import ThongKe from '../ThongKe';
 
-function Header() {
+function Header(props) {
     return (
         <Router>
             <div id='header'>
