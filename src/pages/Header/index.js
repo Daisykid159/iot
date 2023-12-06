@@ -16,7 +16,7 @@ function Header(props) {
                     </li>
 
                     <li className='item'>
-                        <Link to="pages/ThongKe" className='link'>Thống kê</Link>
+                        <Link to="pages/QuanLy" className='link'>Quản Lý</Link>
                     </li>
 
                     <li className='item'>
@@ -26,7 +26,7 @@ function Header(props) {
             </div>
             <Routes>
                 <Route path="pages/Home" element={<Home />} />
-                <Route path="pages/ThongKe" element={<ThongKe />} />
+                <Route path="pages/QuanLy" element={<ThongKe />} />
                 <Route path="pages/ThanhToan" element={<ThanhToan />} />
             </Routes>
         </Router>

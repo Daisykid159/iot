@@ -22,7 +22,8 @@ export const getAllUsers = async () => {
 export const searchUserByDate = async (dateFrom, dateTo) => {
     try {
         console.log(dateFrom, dateTo);
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/user/findUsersByBillOfDate/${dateFrom}/to/${dateTo}`);
+        console.log(response);
         return response;
     } catch (error) {
         throw error;
@@ -33,7 +34,7 @@ export const searchUserByDate = async (dateFrom, dateTo) => {
 export const searchUserByName = async (nameUser) => {
     try {
         console.log(nameUser);
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/user/findUsersByName/${nameUser}`);
         console.log(response);
         return response;
     } catch (error) {
@@ -45,7 +46,41 @@ export const searchUserByName = async (nameUser) => {
 export const searchUserByPhone = async (phoneUser) => {
     try {
         console.log(phoneUser);
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/user/findUsersByPhone/${phoneUser}`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Api call id user vs dateFrom anh dateTo
+export const searchUserByDateAndIdUser = async (IdUser, dateFrom, dateTo) => {
+    try {
+        console.log(dateFrom, dateTo);
+        const response = await axios.get(`${API_URL}/bill/getBillsOfUserByUserIdInRange/${IdUser}/in/${dateFrom}/to/${dateTo}`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Api call chi tiết hóa đơn
+export const getDetailBillOfUserByIdBill = async (IdBill) => {
+    try {
+        const response = await axios.get(`${API_URL}/user/getDetailBillOfUserByIdBill/${IdBill}`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Api call id user
+export const searchUserByIdUser = async (IdUser) => {
+    try {
+        const response = await axios.get(`${API_URL}/bill/getAllBillOfUserBy/${IdUser}`);
         console.log(response);
         return response;
     } catch (error) {
@@ -69,8 +104,8 @@ export const getAllMH = async () => {
 // Api tìm kiếm mặt hàng từ ngày ... đến ngày ...
 export const searchMHByDate = async (dateFrom, dateTo) => {
     try {
-        console.log(dateFrom, dateTo);
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/product/getProductSoldByDate/${dateFrom}/to/${dateTo}`);
+        console.log(response);
         return response;
     } catch (error) {
         throw error;
@@ -80,7 +115,6 @@ export const searchMHByDate = async (dateFrom, dateTo) => {
 // Api tìm kiếm mặt hàng theo tên
 export const searchMHByName = async (nameMH) => {
     try {
-        console.log(nameMH);
         const response = await axios.get(`${API_URL}/user/getAll`);
         console.log(response);
         return response;
@@ -92,7 +126,6 @@ export const searchMHByName = async (nameMH) => {
 // Api tìm kiếm mặt hàng theo ID
 export const searchMHByID = async (IDMH) => {
     try {
-        console.log(IDMH);
         const response = await axios.get(`${API_URL}/user/getAll`);
         console.log(response);
         return response;

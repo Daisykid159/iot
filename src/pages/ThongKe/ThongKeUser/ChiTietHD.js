@@ -1,37 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import IconBack from "~/Icon/IconBack";
 import './thongkeuser.css';
 import { formatNumberWithCommas } from '~/App';
+import { getDetailBillOfUserByIdBill } from '~/API';
 
 function ChiTietHD(props) {
 
-    const ChiTietHDUser = {
-        listsp: [
-            {
-                id_product: 1,
-                name_product: "baansd jasd",
-                price: 1000,
-                quantity: 2,
-            },
-            {
-                id_product: 1,
-                name_product: "baansd jasd",
-                price: 1000,
-                quantity: 2,
-            },
-            {
-                id_product: 1,
-                name_product: "baansd jasd",
-                price: 1000,
-                quantity: 2,
-            }
-        ],
-        sumPrice: 10,
-        point: 1000,
-        isChecked: true,
-        nameKhachHang: "Vũ Văn Dũng",
-        ngayMuahang: '22/10/2002',
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        getChiTietHoadon()
+    }, []);
+
+    const getChiTietHoadon = async () => {
+        try {
+            const response = await getDetailBillOfUserByIdBill(props.bill.id);
+            const result = response.data;
+            setData(result);
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API getChiTietHoadon', error);
+        }
     }
+
+    let totalPrice = 0
+    data?.map(item => {
+        totalPrice += item.price_sold
+    })
 
     return (
         <div>
@@ -42,12 +36,12 @@ function ChiTietHD(props) {
 
             <div className="rowText" >
                 <p>Tên khách hàng:</p>
-                <p>{ChiTietHDUser.nameKhachHang}</p>
+                <p className='textNameKH' >{props.bill.username}</p>
             </div>
 
             <div className="rowText" >
                 <p>Ngày mua hàng:</p>
-                <p>{props.bill.ngayMuaHang}</p>
+                <p className='textNameKH' >{props.bill.createdDate}</p>
             </div>
 
             <div>
@@ -61,42 +55,34 @@ function ChiTietHD(props) {
                         <th className='gia'>Thành tiền</th>
                     </thead>
                     <tbody>
-                        {ChiTietHDUser.listsp?.map((item, index) => (
+                        {data?.map((item, index) => (
                             <tr>
                                 <td>{index + 1}</td>
                                 <td>{item.id_product}</td>
-                                <td>{item.name_product}</td>
-                                <td>{formatNumberWithCommas(item.price)} đ</td>
-                                <td>{item.quantity}</td>
-                                <td>{formatNumberWithCommas(item.quantity * item.price) || 0} đ</td>
+                                <td>{item.product_name}</td>
+                                <td>{formatNumberWithCommas(item.price_unit)} đ</td>
+                                <td>{item.quantity_sold}</td>
+                                <td>{formatNumberWithCommas(item.quantity_sold * item.price_unit) || 0} đ</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
             <div className="tinhtien" >
+
                 <div className="rowTT rowBuild" >
-                    <p className="total1" >Dùng điểm:</p>
-                    <input
-                        className="checkBox"
-                        type="checkbox"
-                        checked={ChiTietHDUser.isChecked}
-                    />
+                    <p className="total2" >Tổng tiền sản phẩm:</p>
+                    <p>{totalPrice} đ</p>
                 </div>
 
                 <div className="rowTT rowBuild" >
-                    <p className="total1" >Tổng tiền sản phẩm:</p>
-                    <p>{ChiTietHDUser.sumPrice + ChiTietHDUser.point} đ</p>
+                    <p className="total2" >Số điểm:</p>
+                    <p>- {props.bill.usedPoint} đ</p>
                 </div>
 
                 <div className="rowTT rowBuild" >
-                    <p className="total1" >Số điểm:</p>
-                    <p>- {ChiTietHDUser.point || 0} đ</p>
-                </div>
-
-                <div className="rowTT rowBuild" >
-                    <p className="total1" >Tổng thanh toán:</p>
-                    <p>{ChiTietHDUser.sumPrice} đ</p>
+                    <p className="total2" >Tổng thanh toán:</p>
+                    <p>{props.bill.totalPrice} đ</p>
                 </div>
             </div>
 

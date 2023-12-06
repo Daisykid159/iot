@@ -15,7 +15,7 @@ function ThongKe(params) {
                     onClick={() => {
                         setShowSP(true)
                     }}>
-                    Thống kê sản phẩm
+                    Quản lý sản phẩm
                 </div>
 
                 <div className='itemSelect'
@@ -23,7 +23,7 @@ function ThongKe(params) {
                     onClick={() => {
                         setShowSP(false)
                     }}>
-                    Thống kê khách hàng
+                    Quản lý khách hàng
                 </div>
             </div>
             {showSP ?

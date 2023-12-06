@@ -67,8 +67,31 @@
 /* CSS for ThongKeUser */
 #ThongKeUser {}
 
+.textNameKH {
+    padding-left: 10px;
+}
+
 .tenKH {
     font-size: 1.8rem;
+}
+
+.listThongKe1 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.itemThongKe1 {
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.total2 {
+    font-weight: 600;
 }
 
 .mg20 {

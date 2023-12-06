@@ -1,62 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import IconBack from "~/Icon/IconBack";
 import ChiTietHD from "./ChiTietHD";
 import './thongkeuser.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import { formatNumberWithCommas } from '~/App';
+import { searchUserByDateAndIdUser, searchUserByIdUser } from '~/API';
 
 function ThongKeUser(props) {
 
-    /* Call api load list bill theo id, item */
-    const data = [
-        {
-            id: 1,
-            ngayMuaHang: "29/02/2022",
-            total: 12831293,
-            sddd: 12123321,
-            sddc: 123214,
-        },
-        {
-            id: 2,
-            ngayMuaHang: "29/02/2022",
-            total: 12831293,
-            sddd: 12123321,
-            sddc: 123214,
-        },
-        {
-            id: 3,
-            ngayMuaHang: "29/02/2022",
-            total: 12831293,
-            sddd: 12123321,
-            sddc: 123214,
-        },
-        {
-            id: 4,
-            ngayMuaHang: "29/02/2022",
-            total: 12831293,
-            sddd: 12123321,
-            sddc: 123214,
-        },
-        {
-            id: 5,
-            ngayMuaHang: "29/02/2022",
-            total: 12831293,
-            sddd: 12123321,
-            sddc: 123214,
-        }
-    ]
-
-    let totalHD = data.length
-    let totalPrice = 0
-    let totalSDDD = 0
-    data.map((item) => {
-        totalPrice += item.total
-        totalSDDD += item.sddd
-    })
-
     const [billSelect, setBillSelect] = useState(null)
     const [showTKCTHD, setShowTKCTHD] = useState(false)
+    const [data, setData] = useState(null);
 
+    useEffect(() => {
+        getUserById()
+    }, []);
+
+    const getUserByTimeAndId = async () => {
+        try {
+            const response = await searchUserByDateAndIdUser(props.item.id, props.dataFrom, props.dataTo);
+            const result = response.data;
+            setData(result);
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API getUserByTimeAndId', error);
+        }
+    }
+
+    const getUserById = async () => {
+        try {
+            console.log(props.item.id);
+            const response = await searchUserByIdUser(props.item.id);
+            const result = response.data;
+            setData(result);
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API getUserByTimeAndId', error);
+        }
+    }
     const clickBill = (item) => {
         setBillSelect(item)
         setShowTKCTHD(true)
@@ -67,6 +46,15 @@ function ThongKeUser(props) {
         setShowTKCTHD(false)
     }
 
+    let totalHD = data?.length
+    let totalPrice = 0
+    let totalSDDD = 0
+
+    data?.map(item => {
+        totalPrice += item.totalPrice
+        totalSDDD += item.usedPoint
+    })
+
     return (
         <div id="ThongKeUser">
             {!showTKCTHD ?
@@ -74,7 +62,7 @@ function ThongKeUser(props) {
                     <div className="iconBack" onClick={() => props.clickBackList()} >
                         <IconBack />
                     </div>
-                    <div className='textThongKeKH' >Thống kê chi tiết khách hàng</div>
+                    <div className='textThongKeKH' >Chi tiết khách hàng</div>
                     <div className='textThongKeKH tenKH' >Tên khách hàng: {props.item.name}</div>
 
                     <div className='listThongKe'>
@@ -85,12 +73,12 @@ function ThongKeUser(props) {
 
                         <div className='itemThongKe red white'>
                             <p>Tổng chi tiêu</p>
-                            <p>{formatNumberWithCommas(totalPrice)} vnđ</p>
+                            <p>{formatNumberWithCommas(totalPrice) || 0} vnđ</p>
                         </div>
 
                         <div className='itemThongKe yellow white'>
                             <p>Tổng số điểm đã được dùng</p>
-                            <p>{formatNumberWithCommas(totalSDDD)} điểm</p>
+                            <p>{formatNumberWithCommas(totalSDDD) || 0} điểm</p>
                         </div>
                     </div>
 
@@ -108,10 +96,10 @@ function ThongKeUser(props) {
                                 {data?.map((item, index) => (
                                     <tr onClick={() => clickBill(item)}>
                                         <td>{index + 1}</td>
-                                        <td>{item.ngayMuaHang}</td>
-                                        <td>{formatNumberWithCommas(item.total)} vnđ</td>
-                                        <td>{formatNumberWithCommas(item.sddd)} điểm</td>
-                                        <td>{formatNumberWithCommas(item.sddc)} điểm</td>
+                                        <td>{item.createdDate}</td>
+                                        <td>{formatNumberWithCommas(item.totalPrice)} vnđ</td>
+                                        <td>{formatNumberWithCommas(item.usedPoint)} điểm</td>
+                                        <td>{formatNumberWithCommas(item.savedPoint)} điểm</td>
                                     </tr>
                                 ))}
                             </tbody>

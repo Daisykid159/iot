@@ -8,36 +8,6 @@ import { formatNumberWithCommas } from '~/App';
 import moment from 'moment';
 
 function ThongKeUserList(props) {
-    const listUser = [
-        {
-            id: 1,
-            name: "Vũ Văn Dũng",
-            phone: "0912359123",
-            point: 124567,
-            uid: null,
-        },
-        {
-            id: 2,
-            name: "Vũ Văn Dũng",
-            phone: "0912359123",
-            point: 124567,
-            uid: null,
-        },
-        {
-            id: 3,
-            name: "Vũ Văn Dũng",
-            phone: "0912359123",
-            point: 124567,
-            uid: null,
-        },
-        {
-            id: 4,
-            name: "Vũ Văn Dũng",
-            phone: "0912359123",
-            point: 124567,
-            uid: null,
-        }
-    ]
 
     let optionSearch = [
         'Tìm kiếm theo thời gian',
@@ -65,40 +35,48 @@ function ThongKeUserList(props) {
             const result = response.data;
             setData(result);
         } catch (error) {
-            setData(listUser);
             console.error('Lỗi trong quá trình gửi yêu cầu API getAllUser', error);
         }
     }
 
     const searchTheoTime = async () => {
+        if(!selectedDateFrom || !selectedDateTo) {
+            alert("Vui lòng chọn ngày bắt đầu và ngày kết thúc!")
+        }
+
         try {
             const response = await searchUserByDate(moment(selectedDateFrom).format('YYYY-MM-DD'), moment(selectedDateTo).format('YYYY-MM-DD'));
             const result = response.data;
             setData(result);
         } catch (error) {
-            setData(listUser);
             console.error('Lỗi trong quá trình gửi yêu cầu API searchTheoTime', error);
         }
     }
 
     const searchTheoTen = async () => {
+        if(!nameUser) {
+            alert("Vui lòng nhập tên tìm!")
+        }
+
         try {
             const response = await searchUserByName(nameUser);
             const result = response.data;
             setData(result);
         } catch (error) {
-            setData(listUser);
             console.error('Lỗi trong quá trình gửi yêu cầu API searchTheoTen', error);
         }
     }
 
     const searchTheoPhone = async () => {
+        if(!phoneUser) {
+            alert("Vui lòng nhập số điện thoại cần tìm!")
+        }
+
         try {
             const response = await searchUserByPhone(phoneUser);
             const result = response.data;
             setData(result);
         } catch (error) {
-            setData(listUser);
             console.error('Lỗi trong quá trình gửi yêu cầu API searchTheoPhone', error);
         }
     }
@@ -137,26 +115,26 @@ function ThongKeUserList(props) {
         setPhoneUser(e.target.value)
     }
 
+    let totalpoint = 0
+    data?.map(item => {
+        totalpoint += item.point
+    })
+
     return (
         <div id='ThongKe'>
             {!showTKUser ?
                 (<div>
-                    <div className='textThongKeKH'>Thống kê khách hàng</div>
+                    <div className='textThongKeKH'>Quản lý khách hàng</div>
 
-                    <div className='listThongKe'>
-                        <div className='itemThongKe green white'>
+                    <div className='listThongKe1'>
+                        <div className='itemThongKe1 green white'>
                             <p>Tổng số khách hàng mua</p>
                             <p>{data?.length || 0}</p>
                         </div>
 
-                        <div className='itemThongKe red white'>
-                            <p>Tổng số điểm đã được dùng</p>
-                            <p>0 điểm</p>
-                        </div>
-
-                        <div className='itemThongKe yellow white'>
-                            <p>Tổng số điểm đã cộng</p>
-                            <p>0 điểm</p>
+                        <div className='itemThongKe1 red white'>
+                            <p>Tổng số điểm khách hàng</p>
+                            <p>{formatNumberWithCommas(totalpoint) || 0} điểm</p>
                         </div>
                     </div>
 
@@ -239,7 +217,11 @@ function ThongKeUserList(props) {
                             </tbody>
                         </table>
                     </div>
-                </div>) : (<ThongKeUser clickBackList={clickBack} item={itemSelect} />)}
+                </div>) : (<ThongKeUser
+                    clickBackList={clickBack}
+                    item={itemSelect}
+                    dataFrom={moment(selectedDateFrom).format('YYYY-MM-DD') || null}
+                    dataTo={moment(selectedDateTo).format('YYYY-MM-DD') || null} />)}
         </div>
     )
 }

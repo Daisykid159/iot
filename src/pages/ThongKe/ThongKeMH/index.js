@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconSearch from '~/Icon/IconSearch';
 import ChiTietUserListBuyMH from './ChiTietUserListBuyMH';
 import './thongkemh.css';
@@ -17,19 +17,27 @@ function ThongKeListMh(props) {
 
     const [showCTLUMH, setShowCTLUMH] = useState(false)
     const [mhSelect, setMhSelect] = useState(null)
-    const [selectedDateFrom, setSelectedDateFrom] = useState(null);
-    const [selectedDateTo, setSelectedDateTo] = useState(null);
+    const [selectedDateFrom, setSelectedDateFrom] = useState(new Date());
+    const [selectedDateTo, setSelectedDateTo] = useState(new Date());
     const [selectedOption, setSelectedOption] = useState('');
     const [showSearch, setShowSearch] = useState(1)
     const [nameMH, setNameMH] = useState('');
     const [IDMH, setIDMH] = useState();
     const [data, setData] = useState(null)
 
+    useEffect(() => {
+        searchTheoTime()
+    }, [])
+
     const clickBackListMH = () => {
         setShowCTLUMH(false)
     }
 
     const searchTheoTime = async () => {
+        if(!selectedDateFrom || !selectedDateTo) {
+            alert("Vui lòng chọn ngày bắt đầu và ngày kết thúc!")
+        }
+
         try {
             const response = await searchMHByDate(moment(selectedDateFrom).format('YYYY-MM-DD'), moment(selectedDateTo).format('YYYY-MM-DD'));
             const result = response.data;
@@ -40,6 +48,10 @@ function ThongKeListMh(props) {
     }
 
     const searchTheoTen = async () => {
+        if(!nameMH) {
+            alert("Vui lòng nhập tên tìm!")
+        }
+
         try {
             const response = await searchMHByName(nameMH);
             const result = response.data;
@@ -50,6 +62,10 @@ function ThongKeListMh(props) {
     }
 
     const searchTheoID = async () => {
+        if(!IDMH) {
+            alert("Vui lòng nhập id sản phẩm cần tìm!")
+        }
+
         try {
             const response = await searchMHByID(IDMH);
             const result = response.data;
@@ -88,25 +104,27 @@ function ThongKeListMh(props) {
         setIDMH(e.target.value)
     }
 
+    let totalprice = 0
+    let totalQuantity = 0
+    data?.map(item => {
+        totalprice += item.price_sold
+        totalQuantity += item.quantity_sold
+    })
+
     return (
         <div id='ThongKeListMh'>
             {!showCTLUMH ? (<div>
-                <div className='textThongKeKH' >Thống kê sản phẩm</div>
+                <div className='textThongKeKH' >Quản lý sản phẩm</div>
 
-                <div className='listThongKe'>
-                    <div className='itemThongKe green white'>
-                        <p>Tổng số doanh số</p>
-                        <p>0 vnđ</p>
+                <div className='listThongKe1'>
+                    <div className='itemThongKe1 green white'>
+                        <p>Tổng số doanh thu</p>
+                        <p>{formatNumberWithCommas(totalprice) || 0} vnđ</p>
                     </div>
 
-                    <div className='itemThongKe red white'>
-                        <p>Tổng số lượng đơn hàng</p>
-                        <p>0 đơn</p>
-                    </div>
-
-                    <div className='itemThongKe yellow white'>
+                    <div className='itemThongKe1 red white'>
                         <p>Tổng số lượng sản phẩm đã bán</p>
-                        <p>0</p>
+                        <p>{formatNumberWithCommas(totalQuantity) || 0} sản phẩm</p>
                     </div>
                 </div>
 
@@ -184,10 +202,10 @@ function ThongKeListMh(props) {
                                 <tr onClick={() => clickSPSelect(item)} >
                                     <td>{index + 1}</td>
                                     <td>{item.id_product}</td>
-                                    <td>{item.name_product}</td>
-                                    <td>{formatNumberWithCommas(item.sldb * 1000)}</td>
-                                    <td>{formatNumberWithCommas(item.sldb)}</td>
-                                    <td>{formatNumberWithCommas(item.slcl)}</td>
+                                    <td>{item.product_name}</td>
+                                    <td>{formatNumberWithCommas(item.price_sold)}</td>
+                                    <td>{formatNumberWithCommas(item.quantity_sold)}</td>
+                                    <td>{formatNumberWithCommas(item.quantity_remain)}</td>
                                 </tr>
                             ))}
                         </tbody>

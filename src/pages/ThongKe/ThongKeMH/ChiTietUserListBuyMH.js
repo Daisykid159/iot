@@ -49,7 +49,7 @@ function ChiTietUserListBuyMH(props) {
                 </div>
 
                 <div className='textThongKeKH' >Thống kê sản phẩm</div>
-                <div className='textThongKeKH tenKH' >Tên sản phẩm: {props.item.name_product}</div>
+                <div className='textThongKeKH tenKH' >Tên sản phẩm: {props.item.product_name}</div>
 
                 <div>
                     <table>
