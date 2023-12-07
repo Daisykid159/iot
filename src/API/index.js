@@ -115,7 +115,7 @@ export const searchMHByDate = async (dateFrom, dateTo) => {
 // Api tìm kiếm mặt hàng theo tên
 export const searchMHByName = async (nameMH) => {
     try {
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/product/getProductSoldByName/${nameMH}`);
         console.log(response);
         return response;
     } catch (error) {
@@ -126,7 +126,7 @@ export const searchMHByName = async (nameMH) => {
 // Api tìm kiếm mặt hàng theo ID
 export const searchMHByID = async (IDMH) => {
     try {
-        const response = await axios.get(`${API_URL}/user/getAll`);
+        const response = await axios.get(`${API_URL}/product/getProductSoldById/${IDMH}`);
         console.log(response);
         return response;
     } catch (error) {

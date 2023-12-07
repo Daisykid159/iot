@@ -106,6 +106,7 @@ function ThongKeListMh(props) {
 
     let totalprice = 0
     let totalQuantity = 0
+
     data?.map(item => {
         totalprice += item.price_sold
         totalQuantity += item.quantity_sold
