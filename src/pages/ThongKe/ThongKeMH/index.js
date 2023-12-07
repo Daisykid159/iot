@@ -69,7 +69,9 @@ function ThongKeListMh(props) {
         try {
             const response = await searchMHByID(IDMH);
             const result = response.data;
-            setData(result);
+            if (typeof result === "object" && result !== null) {
+                setData([result]);
+            } else setData(result);
         } catch (error) {
             console.error('Lỗi trong quá trình gửi yêu cầu API searchTheoTenMH', error);
         }
