@@ -3,6 +3,7 @@ import IconBack from "~/Icon/IconBack";
 import './thongkeuser.css';
 import { formatNumberWithCommas } from '~/App';
 import { getDetailBillOfUserByIdBill } from '~/API';
+import moment from 'moment';
 
 function ChiTietHD(props) {
 
@@ -36,12 +37,12 @@ function ChiTietHD(props) {
 
             <div className="rowText" >
                 <p>Tên khách hàng:</p>
-                <p className='textNameKH' >{props.bill.username}</p>
+                <p className='textNameKH' >{(props.bill.username === "Guest") ? "Không có thông tin khách hàng" : props.bill.username }</p>
             </div>
 
             <div className="rowText" >
                 <p>Ngày mua hàng:</p>
-                <p className='textNameKH' >{props.bill.createdDate}</p>
+                <p className='textNameKH' >{moment(props.bill.createdDate).format('YYYY-MM-DD')}</p>
             </div>
 
             <div>
@@ -77,12 +78,12 @@ function ChiTietHD(props) {
 
                 <div className="rowTT rowBuild" >
                     <p className="total2" >Số điểm:</p>
-                    <p>- {props.bill.usedPoint} đ</p>
+                    <p>- {formatNumberWithCommas(totalPrice - props.bill.totalPrice)} đ</p>
                 </div>
 
                 <div className="rowTT rowBuild" >
                     <p className="total2" >Tổng thanh toán:</p>
-                    <p>{props.bill.totalPrice} đ</p>
+                    <p>{formatNumberWithCommas(props.bill.totalPrice)} đ</p>
                 </div>
             </div>
 

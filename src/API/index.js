@@ -134,6 +134,18 @@ export const searchMHByID = async (IDMH) => {
     }
 };
 
+// Api get list user buy product
+export const getListUserBuyProduct = async (IdProduct) => {
+    try {
+        console.log(IdProduct);
+        const response = await axios.get(`${API_URL}/user/getUserByProductSoldByIdProduct/${IdProduct}`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
 /* APi modul thanh toán */
 
 // Api lấy danh sách all sản phẩm
@@ -215,7 +227,9 @@ export const summitThanhToan = async (dayTT, id_user, totalPrice, usePoint, prod
 
         const response = await axios.post(`${API_URL}/bill/create/${id_user}`, {
             "createdDate": dayTT,
+            "id_user": id_user,
             "totalPrice": totalPrice,
+            "usePoint": usePoint,
             "productCustomList": listspCanTT
         });
         console.log(response, "User");

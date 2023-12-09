@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IconBack from '~/Icon/IconBack';
 import './thongkemh.css';
 import ChiTietHD from '~/pages/ThongKe/ThongKeUser/ChiTietHD';
+import { getListUserBuyProduct } from '~/API';
+import moment from 'moment/moment';
+import { formatNumberWithCommas } from '~/App';
 
 function ChiTietUserListBuyMH(props) {
 
-    const data = [
-        {
-            idUser: 1,
-            idBill: 1,
-            nameUser: "Vu Van Dung",
-            soLuongDaMua: "20",
-            ngayMuaHang: '10/22/2022'
-        }
-    ]
-
     const [showBill, setShowBill] = useState(false)
     const [billSelect, setBillSelect] = useState(null)
-    const [selectedDateFrom, setSelectedDateFrom] = useState(null);
-    const [selectedDateTo, setSelectedDateTo] = useState(null);
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        getListUserBuyMH();
+    }, [])
+
+    const getListUserBuyMH = async () => {
+        try {
+            const response = await getListUserBuyProduct(props.item.id_product);
+            const result = response.data;
+            setData(result);
+        } catch (error) {
+            console.error('Lỗi trong quá trình gửi yêu cầu API getListUserBuyMH', error);
+        }
+    }
 
     const clickBackUserListBuyMH = () => {
         setShowBill(false)
@@ -29,17 +35,6 @@ function ChiTietUserListBuyMH(props) {
         setShowBill(true)
         setBillSelect(item)
     }
-    const handleDateFrom = date => {
-        setSelectedDateFrom(date);
-    };
-
-    const handleDateTo = date => {
-        setSelectedDateTo(date)
-    }
-
-    const formatNumberWithCommas = (number) => {
-        return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
-    };
 
     return (
         <div id='ChiTietUserListBuyMH'>
@@ -63,9 +58,9 @@ function ChiTietUserListBuyMH(props) {
                         {data?.map((item, index) => (
                             <tr onClick={() => clickBillSelect(item)}>
                                 <td>{index + 1}</td>
-                                <td>{item.nameUser}</td>
-                                <td>{item.ngayMuaHang}</td>
-                                <td>{formatNumberWithCommas(item.soLuongDaMua)}</td>
+                                <td>{(item.username === "Guest") ? "Không có thông tin khách hàng" : item.username }</td>
+                                <td>{moment(item.sale_date).format('YYYY-MM-DD')}</td>
+                                <td>{formatNumberWithCommas(item.quantity_product)}</td>
                             </tr>
                         ))}
                         </tbody>

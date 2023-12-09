@@ -6,6 +6,7 @@ import XacNhanThanhToan from '~/pages/ThanhToan/XacNhanThanhToan';
 import { summitThanhToan, summitThanhToanNotUser } from '~/API';
 import user from '~/pages/ThanhToan/User';
 import moment from 'moment';
+import { formatNumberWithCommas } from '~/App';
 
 const listsp = [];
 
@@ -109,10 +110,6 @@ const ListSp = (props) => {
     }
 
     let tmpSumPrice = 0;
-
-    const formatNumberWithCommas = (number) => {
-        return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
-    };
 
     useEffect(() => {
         if (update) {

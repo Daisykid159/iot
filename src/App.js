@@ -12,7 +12,8 @@ function App() {
 }
 
 export const formatNumberWithCommas = (number) => {
-    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || number;
+    const tmp = number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return tmp.split('.')[0] || number;
 };
 
 export default App;
